@@ -1,0 +1,16 @@
+language: en_us
+
+blocks:
+  test-block:
+    enabled-material: OAK_LOG
+    disabled-material: OBSIDIAN
+    durability: 20
+    y-level: 2
+    permission: durablock.break.test-block
+    # See DecentHolograms wiki for format & colors: https://wiki.decentholograms.eu/general/format-and-colors/
+    enabled-hologram-lines:
+      - "Obsidian Block"
+      - "#SMALLHEAD: OBSIDIAN"
+      - "<#FF0000>Durability: {durability}</#00FF00>"
+    disabled-hologram-lines:
+      - "disabled for now"
