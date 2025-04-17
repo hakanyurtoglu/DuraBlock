@@ -1,16 +1,40 @@
 language: en_us
 
+# Interval for updating hologram (in seconds)
+hologram-update-interval: 1
+# Interval for checking if blocks needs to be enabled (in seconds)
+block-restore-interval: 1
+
 blocks:
   test-block:
-    enabled-material: OAK_LOG
-    disabled-material: OBSIDIAN
     durability: 20
+    # Time for restoring the block after being broken (in seconds)
+    restore-interval: 30
+    # How much the hologram should be higher than the block
     y-level: 2
     permission: durablock.break.test-block
     # See DecentHolograms wiki for format & colors: https://wiki.decentholograms.eu/general/format-and-colors/
     enabled-hologram-lines:
-      - "Obsidian Block"
-      - "#SMALLHEAD: OBSIDIAN"
+      - "Test Block"
       - "<#FF0000>Durability: {durability}</#00FF00>"
     disabled-hologram-lines:
-      - "disabled for now"
+      - "Disabled for now."
+      - "Will be activated in: {restore}"
+      - "Broken by: {last_player}"
+    # Commands that executes with chance when the block's durability is higher than 0
+    rewards:
+      - command: "give {player} diamond 1"
+        chance: 0.1 # %10 chance
+      - command: "give {player} emerald 2"
+        chance: 0.3 # %30 chance
+    on-break:
+      sound:
+        enabled: true
+        # https://jd.papermc.io/paper/1.21.4/org/bukkit/Sound.html for sound list
+        sound-type: "BLOCK_ANVIL_BREAK"
+        play-to-everyone: true
+      broadcast:
+        enabled: true
+        message: "<red>{player} broke the test-block"
+      commands:
+        - "give {player} diamond 16"

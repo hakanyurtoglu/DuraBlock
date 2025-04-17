@@ -3,7 +3,7 @@ version: '1.0-SNAPSHOT'
 main: me.raisy.durablock.DuraBlockPlugin
 api-version: '1.21'
 
-softdepend:
+depend:
   - DecentHolograms
 
 commands:
@@ -11,6 +11,11 @@ commands:
     description: "setcustomblock command"
     permission: durablock.commands.setcustomblock
     usage: /setcustomblock <block-type>
+
+  reloadcustomblocks:
+    description: "reload command"
+    permission: durablock.commands.reload
+    usage: /reloadcustomblocks
 
   listcustomblocks:
     description: "listcustomblock command"
@@ -22,13 +27,16 @@ commands:
     permission: durablock.commands.deletecustomblock
     usage: /deletecustomblock
 
-  permissions:
-    durablock.commands.setcustomblock:
-      description: "Permission for setcustomblock command"
-      default: op
-    durablock.commands.listcustomblocks:
-      description: "permission for listcustomblocks command"
-      default: op
-    durablock.commands.deletecustomblock:
-      description: "Permission for deletecustomblock command"
-      default: op
+permissions:
+  durablock.commands.setcustomblock:
+    description: "Permission for setcustomblock command"
+    default: op
+  durablock.commands.listcustomblocks:
+    description: "permission for listcustomblocks command"
+    default: op
+  durablock.commands.deletecustomblock:
+    description: "Permission for deletecustomblock command"
+    default: op
+  durablock.commands.reload:
+    description: "Permission for reloadcustomblocks command"
+    default: op

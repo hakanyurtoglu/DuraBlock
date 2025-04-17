@@ -1,18 +1,16 @@
 package me.raisy.durablock.model;
 
-import org.bukkit.Material;
-
 import java.util.List;
 
 public class BlockType {
     private String name;
     private int defaultDurability;
     private String permission;
-    private Material enabledBlockMaterial;
-    private Material disabledBLockMaterial;
     private List<String> enabledHologramLines;
     private List<String> disabledhologramLines;
     private int yLevel;
+    private int restoreInterval;
+    private List<Reward> rewards;
 
 
     public String getName() {
@@ -47,21 +45,6 @@ public class BlockType {
         this.disabledhologramLines = disabledhologramLines;
     }
 
-    public Material getEnabledBlockMaterial() {
-        return enabledBlockMaterial;
-    }
-
-    public void setEnabledBlockMaterial(Material enabledBlockMaterial) {
-        this.enabledBlockMaterial = enabledBlockMaterial;
-    }
-
-    public Material getDisabledBLockMaterial() {
-        return disabledBLockMaterial;
-    }
-
-    public void setDisabledBLockMaterial(Material disabledBLockMaterial) {
-        this.disabledBLockMaterial = disabledBLockMaterial;
-    }
 
     public int getyLevel() {
         return yLevel;
@@ -77,5 +60,21 @@ public class BlockType {
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public int getRestoreInterval() {
+        return restoreInterval;
+    }
+
+    public void setRestoreInterval(int restoreInterval) {
+        this.restoreInterval = restoreInterval;
+    }
+
+    public List<Reward> getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
     }
 }

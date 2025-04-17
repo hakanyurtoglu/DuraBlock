@@ -37,6 +37,12 @@ public class CustomBlocksService {
         customBlocksDao.create(customBlocks);
     }
 
+    public void restoreCustomBlock(CustomBlocksEntity customBlocksEntity, int defaultDurability) throws SQLException {
+        customBlocksEntity.setStatus("enabled");
+        customBlocksEntity.setCurrentDurability(defaultDurability);
+        customBlocksDao.update(customBlocksEntity);
+    }
+
     public boolean isBlockExists(Location blockLocation) throws SQLException {
         String locationString = LocationUtil.locationToString(blockLocation);
         List<CustomBlocksEntity> blockExists = customBlocksDao.queryForEq("location", locationString);
