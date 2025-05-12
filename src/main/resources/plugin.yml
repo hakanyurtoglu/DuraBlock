@@ -27,6 +27,13 @@ commands:
     permission: durablock.commands.deletecustomblock
     usage: /deletecustomblock
 
+  durablock:
+    description: "DuraBlock command"
+    permission: durablock.commands.main
+    usage: /durablock
+    aliases:
+      - durablocks
+
 permissions:
   durablock.commands.setcustomblock:
     description: "Permission for setcustomblock command"
@@ -39,4 +46,7 @@ permissions:
     default: op
   durablock.commands.reload:
     description: "Permission for reloadcustomblocks command"
+    default: op
+  durablock.commands.main:
+    description: "Permission for durablock command"
     default: op

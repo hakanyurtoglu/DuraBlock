@@ -42,8 +42,6 @@ public class ConfigManager {
             List<Map<?, ?>> rewardSection = blocksSection.getMapList(path + ".rewards");
 
 
-            System.out.println(rewardSection);
-
             BlockType blockType = new BlockType();
             blockType.setName(blockName);
             blockType.setDefaultDurability(defaultDurability);

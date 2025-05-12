@@ -1,10 +1,7 @@
 package me.raisy.durablock;
 
 import eu.decentsoftware.holograms.api.holograms.Hologram;
-import me.raisy.durablock.command.DeleteBlockCommand;
-import me.raisy.durablock.command.ListBlocksCommand;
-import me.raisy.durablock.command.ReloadCommand;
-import me.raisy.durablock.command.SetBlockCommand;
+import me.raisy.durablock.command.*;
 import me.raisy.durablock.database.CustomBlocksService;
 import me.raisy.durablock.listener.BlockBreakListener;
 import me.raisy.durablock.model.BlockType;
@@ -31,7 +28,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
     private LanguageManager languageManager;
     private CustomBlocksService customBlocksService;
     private ConfigManager configManager;
-    
+
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
@@ -48,6 +45,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
         getCommand("listcustomblocks").setExecutor(new ListBlocksCommand(this));
         getCommand("deletecustomblock").setExecutor(new DeleteBlockCommand(this));
         getCommand("reloadcustomblocks").setExecutor(new ReloadCommand(this));
+        getCommand("durablock").setExecutor(new DurablockCommand(this));
 
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
 
@@ -56,7 +54,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
                 getDataFolder().mkdirs();
             }
 
-            customBlocksService = new CustomBlocksService(getDataFolder().getAbsolutePath() + "/data.db");
+            customBlocksService = new CustomBlocksService(getDataFolder().getAbsolutePath() + "/data.db", this);
 
             configManager.loadCustomBlocks();
 

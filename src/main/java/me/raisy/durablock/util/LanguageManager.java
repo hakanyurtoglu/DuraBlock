@@ -40,7 +40,11 @@ public class LanguageManager {
         }
 
         languageConfig = YamlConfiguration.loadConfiguration(langFile);
+    }
 
+    public void reloadLanguage() {
+        saveDefaultLanguageFiles();
+        loadLanguage();
     }
 
     public String getString(String key) {

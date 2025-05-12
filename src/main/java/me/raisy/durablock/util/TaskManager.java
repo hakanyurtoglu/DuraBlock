@@ -1,6 +1,5 @@
 package me.raisy.durablock.util;
 
-import eu.decentsoftware.holograms.api.holograms.Hologram;
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.database.entity.CustomBlocksEntity;
 import me.raisy.durablock.model.BlockType;
@@ -8,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class TaskManager {
     private DuraBlockPlugin plugin;
@@ -47,17 +45,8 @@ public class TaskManager {
 
                 if (isPassed && customBlocksEntity.getStatus().equals("disabled")) {
                     plugin.getCustomBlocksService().restoreCustomBlock(customBlocksEntity, defaultDurability);
-                    Hologram hologram = plugin.getHolograms().get(LocationUtil.stringToLocation(customBlocksEntity.getLocation()));
 
-                    if (hologram == null) return;
-
-//                     Update Hologram
-                    List<String> lines = blockType.getEnabledHologramLines();
-                    List<String> parsedLines = lines.stream()
-                            .map(line -> line.replace("{durability}", Integer.toString(defaultDurability)))
-                            .toList();
-
-                    plugin.getHologramManager().updateHologram(hologram, parsedLines);
+                    plugin.getHologramManager().updateHologramValues(blockType, customBlocksEntity, defaultDurability);
                 }
             }
 

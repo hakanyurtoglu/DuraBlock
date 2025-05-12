@@ -34,6 +34,19 @@ public class HologramManager {
         DHAPI.setHologramLines(hologram, lines);
     }
 
+    public void updateHologramValues(BlockType blockType, CustomBlocksEntity customBlocksEntity, int durability) {
+        Hologram hologram = plugin.getHolograms().get(LocationUtil.stringToLocation(customBlocksEntity.getLocation()));
+
+        if (hologram == null) return;
+
+        List<String> lines = blockType.getEnabledHologramLines();
+        List<String> parsedLines = lines.stream()
+                .map(line -> line.replace("{durability}", Integer.toString(durability)))
+                .toList();
+
+        plugin.getHologramManager().updateHologram(hologram, parsedLines);
+    }
+
     public void updateDisabledBlockHolograms() {
         Map<Location, Hologram> holograms = plugin.getHolograms();
 
