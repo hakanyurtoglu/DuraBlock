@@ -1,11 +1,10 @@
 package me.raisy.durablock;
 
 import eu.decentsoftware.holograms.api.holograms.Hologram;
-import me.raisy.durablock.command.*;
+import me.raisy.durablock.command.DurablockCommand;
 import me.raisy.durablock.database.CustomBlocksService;
 import me.raisy.durablock.listener.BlockBreakListener;
 import me.raisy.durablock.model.BlockType;
-import me.raisy.durablock.model.CustomBlock;
 import me.raisy.durablock.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,10 +16,8 @@ import java.util.Map;
 
 public final class DuraBlockPlugin extends JavaPlugin {
     // Map<String blockName, BlockType>
-    // Map<Location blockLocation, CustomBlock>
     // Map<Location blockLocation, Hologram>
-    private final Map<String, BlockType> blockTypes = new HashMap<String, BlockType>();
-    private final Map<Location, CustomBlock> customBlocks = new HashMap<Location, CustomBlock>();
+    private final Map<String, BlockType> blockTypes = new HashMap<>();
     private final Map<Location, Hologram> holograms = new HashMap<>();
     private final HologramManager hologramManager = new HologramManager(this);
     private final TaskManager taskManager = new TaskManager(this);
@@ -41,10 +38,6 @@ public final class DuraBlockPlugin extends JavaPlugin {
         languageManager.saveDefaultLanguageFiles();
         languageManager.loadLanguage();
 
-        getCommand("setcustomblock").setExecutor(new SetBlockCommand(this));
-        getCommand("listcustomblocks").setExecutor(new ListBlocksCommand(this));
-        getCommand("deletecustomblock").setExecutor(new DeleteBlockCommand(this));
-        getCommand("reloadcustomblocks").setExecutor(new ReloadCommand(this));
         getCommand("durablock").setExecutor(new DurablockCommand(this));
 
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
@@ -54,7 +47,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
                 getDataFolder().mkdirs();
             }
 
-            customBlocksService = new CustomBlocksService(getDataFolder().getAbsolutePath() + "/data.db", this);
+            customBlocksService = new CustomBlocksService(getDataFolder().getAbsolutePath() + "/data.db");
 
             configManager.loadCustomBlocks();
 
@@ -69,9 +62,6 @@ public final class DuraBlockPlugin extends JavaPlugin {
 
     }
 
-    public Map<Location, CustomBlock> getCustomBlocks() {
-        return customBlocks;
-    }
 
     public Map<String, BlockType> getBlockTypes() {
         return blockTypes;

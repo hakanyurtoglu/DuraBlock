@@ -31,8 +31,6 @@ public class ConfigManager {
         for (String blockName : blocksSection.getKeys(false)) {
             String path = blockName;
 
-//            Material enabledMaterial = Material.getMaterial(blocksSection.getString(path + ".enabled-material"));
-//            Material disabledMaterial = Material.getMaterial(blocksSection.getString(path + ".disabled-material"));
             String permission = blocksSection.getString(path + ".permission");
             int defaultDurability = blocksSection.getInt(path + ".durability");
             int yLevel = blocksSection.getInt(path + ".y-level");
@@ -45,9 +43,7 @@ public class ConfigManager {
             BlockType blockType = new BlockType();
             blockType.setName(blockName);
             blockType.setDefaultDurability(defaultDurability);
-//            blockType.setEnabledBlockMaterial(enabledMaterial);
             blockType.setPermission(permission);
-//            blockType.setDisabledBLockMaterial(disabledMaterial);
             blockType.setEnabledHologramLines(enabledHologramLines);
             blockType.setDisabledhologramLines(disabledHologramLines);
             blockType.setyLevel(yLevel);
@@ -90,12 +86,6 @@ public class ConfigManager {
             Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, lines, customBlocksEntity.getCurrentDurability());
 
             plugin.getHolograms().put(blockLocation, hologram);
-//            CustomBlock customBlock = new CustomBlock();
-//            customBlock.setBlockType(blockType);
-//            customBlock.setCurrentDurability(customBlocksEntity.getCurrentDurability());
-//            customBlock.setId(customBlocksEntity.getId());
-//            customBlock.setLocation(hologramLocation);
-//            customBlock.setHologram(hologram);
 
         }
 
@@ -104,7 +94,6 @@ public class ConfigManager {
     public void reloadCustomBlocks() throws SQLException {
         plugin.getHologramManager().removeAllHolograms();
         plugin.getHolograms().clear();
-        plugin.getCustomBlocks().clear();
         loadCustomBlocks();
     }
 

@@ -7,9 +7,7 @@ import com.j256.ormlite.logger.Level;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.database.entity.CustomBlocksEntity;
-import me.raisy.durablock.model.CustomBlock;
 import me.raisy.durablock.util.LocationUtil;
 import org.bukkit.Location;
 
@@ -18,10 +16,8 @@ import java.util.List;
 
 public class CustomBlocksService {
     private final Dao<CustomBlocksEntity, Integer> customBlocksDao;
-    private final DuraBlockPlugin plugin;
 
-    public CustomBlocksService(String path, DuraBlockPlugin plugin) throws SQLException {
-        this.plugin = plugin;
+    public CustomBlocksService(String path) throws SQLException {
 
         ConnectionSource connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + path);
         Logger.setGlobalLogLevel(Level.ERROR);
@@ -34,17 +30,6 @@ public class CustomBlocksService {
         return customBlocksDao.queryForAll();
     }
 
-    public void addCustomBlock(CustomBlock customBlock) throws SQLException {
-        String locationString = LocationUtil.locationToString(customBlock.getLocation());
-        CustomBlocksEntity customBlocks = new CustomBlocksEntity();
-
-        customBlocks.setBlockType(customBlock.getBlockType().getName());
-        customBlocks.setLocation(locationString);
-        customBlocks.setCurrentDurability(customBlock.getBlockType().getDefaultDurability());
-
-        customBlocksDao.create(customBlocks);
-    }
-
     public void addCustomBlock(CustomBlocksEntity customBlocksEntity) throws SQLException {
         customBlocksDao.create(customBlocksEntity);
     }
@@ -53,18 +38,6 @@ public class CustomBlocksService {
         customBlocksEntity.setStatus("enabled");
         customBlocksEntity.setCurrentDurability(defaultDurability);
         customBlocksDao.update(customBlocksEntity);
-    }
-
-    public void restoreAllCustomBlocks() throws SQLException {
-        List<CustomBlocksEntity> allCustomBlocks = getAllCustomBlocks();
-
-        for (CustomBlocksEntity customBlocksEntity : allCustomBlocks) {
-            int defaultDurability = plugin.getBlockTypes().get(customBlocksEntity.getBlockType()).getDefaultDurability();
-
-            customBlocksEntity.setStatus("enabled");
-            customBlocksEntity.setCurrentDurability(defaultDurability);
-            customBlocksDao.update(customBlocksEntity);
-        }
     }
 
     public boolean isBlockExists(Location blockLocation) throws SQLException {

@@ -2,8 +2,6 @@ package me.raisy.durablock.command;
 
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.subcommand.*;
-import me.raisy.durablock.command.subcommand.ListBlocksCommand;
-import me.raisy.durablock.command.subcommand.ReloadCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
@@ -77,10 +75,10 @@ public class DurablockCommand implements TabExecutor {
     }
 
     private void displayHelp(CommandSender sender) {
-        sender.sendMessage(Component.text("=== DuraBlock Help ===", NamedTextColor.GOLD));
+        sender.sendMessage(Component.text("--------------- DuraBlock Help Menu ---------------", NamedTextColor.GOLD));
 
         for (SubCommand subCommand : subCommands) {
-            sender.sendMessage(Component.text(subCommand.getName() + " => " + subCommand.getDescription()));
+            sender.sendMessage(Component.text(subCommand.getName() + " - " + subCommand.getDescription(), NamedTextColor.YELLOW));
         }
     }
 }

@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.sql.SQLException;
 
 public class TaskManager {
-    private DuraBlockPlugin plugin;
+    private final DuraBlockPlugin plugin;
     private BukkitTask updateDisabledHologramsTask;
     private BukkitTask restoreBlocksTask;
 
@@ -37,7 +37,7 @@ public class TaskManager {
                 int defaultDurability = blockType.getDefaultDurability();
                 int durabilityRestoreInterval = blockType.getRestoreInterval();
 
-//                 Check if the block passed time
+                // Check if the block passed time
                 Long lastBrokenDate = customBlocksEntity.getLastBrokenDate();
                 if (lastBrokenDate == null) return;
 

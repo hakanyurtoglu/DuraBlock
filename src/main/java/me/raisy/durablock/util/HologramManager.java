@@ -6,7 +6,6 @@ import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.database.entity.CustomBlocksEntity;
 import me.raisy.durablock.model.BlockType;
 import org.bukkit.Location;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.Map;
 
 public class HologramManager {
     private final DuraBlockPlugin plugin;
-    private BukkitTask updateTask;
 
     public HologramManager(DuraBlockPlugin plugin) {
         this.plugin = plugin;
@@ -68,7 +66,6 @@ public class HologramManager {
                         .toList();
 
                 updateHologram(hologram, parsedLines);
-//                plugin.getLogger().info("Updated: " + hologram.getName());
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,24 +74,8 @@ public class HologramManager {
     }
 
     public void removeAllHolograms() {
-//        try {
-//            List<CustomBlocksEntity> customBlocks = plugin.getCustomBlocksService().getAllCustomBlocks();
-//
-//            for (CustomBlocksEntity customBlock : customBlocks) {
-//                BlockType blockType = plugin.getBlockTypes().get(customBlock.getBlockType());
-//                Location hologramLocation = LocationUtil.stringToLocation(customBlock.getLocation()).clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
-//                String hologramName = "durablock-" + hologramLocation.getBlockX() + "-" + hologramLocation.getBlockY() + "-" + hologramLocation.getBlockZ();
-//
-//                removeHologram(hologramName);
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-
         for (Hologram hologram : plugin.getHolograms().values()) {
             hologram.destroy();
-
         }
     }
 

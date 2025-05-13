@@ -72,26 +72,10 @@ public class AddBlockCommand implements SubCommand {
             throw new RuntimeException(e);
         }
 
-        //TODO: check is material valid in config manager
-        // Set target block to enabled block material
-//        Material material = blockType.getEnabledBlockMaterial();
-//        targetBlock.setType(material);
-
         // Create hologram
-//        String hologramName = "durablock-" + targetBlock.getLocation().getBlockX() + targetBlock.getLocation().getBlockY() + targetBlock.getLocation().getBlockZ();
-//        Location hologramLocation = targetBlock.getLocation().clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
-//        Hologram hologram = DHAPI.createHologram(hologramName, hologramLocation, blockType.getEnabledHologramLines());
         Location hologramLocation = targetBlock.getLocation().clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
         Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, blockType.getEnabledHologramLines(), blockType.getDefaultDurability());
-
         plugin.getHolograms().put(targetBlock.getLocation(), hologram);
-
-        // Create custom block
-//        CustomBlock customBlock = new CustomBlock();
-//        customBlock.setBlockType(blockType);
-//        customBlock.setLocation(targetBlock.getLocation());
-//        customBlock.setCurrentDurability(blockType.getDefaultDurability());
-//        customBlock.setHologram(hologram);
 
         // Create custom block
         CustomBlocksEntity customBlocksEntity = new CustomBlocksEntity();
@@ -105,8 +89,6 @@ public class AddBlockCommand implements SubCommand {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-//        plugin.getCustomBlocks().put(targetBlock.getLocation(), customBlock);
 
         return true;
     }

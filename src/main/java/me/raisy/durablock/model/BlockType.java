@@ -45,7 +45,6 @@ public class BlockType {
         this.disabledhologramLines = disabledhologramLines;
     }
 
-
     public int getyLevel() {
         return yLevel;
     }
