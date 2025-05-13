@@ -13,7 +13,7 @@ list-command-message: "<yellow>Block type: <green>{block_type} <yellow>Durabilit
 deleted-successfully: "<green>Custom block deleted successfully."
 failed-to-delete: "<red>Custom block could not be deleted."
 restoration-ready: "Restoring"
-restored-successfully: "<green>Successfully restores specified blocks!"
+restored-successfully: "<green>Successfully restored specified blocks!"
 invalid-subcommand: "<red>Invalid command! use /durablock to display help menu."
 
 date:
