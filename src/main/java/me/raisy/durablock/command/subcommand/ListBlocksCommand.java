@@ -51,7 +51,7 @@ public class ListBlocksCommand implements SubCommand {
 
                 Component deleteButton = Component.text("[X] ", NamedTextColor.RED)
                         .hoverEvent(HoverEvent.showText(plugin.getLanguageManager().getDeserializedString("click-to-delete")))
-                        .clickEvent(ClickEvent.runCommand("/durablock restore " + customBlock.getId()));
+                        .clickEvent(ClickEvent.runCommand("/durablock remove " + customBlock.getId()));
 
                 Component restoreButton = Component.text("[↺] ", NamedTextColor.YELLOW)
                         .hoverEvent(HoverEvent.showText(plugin.getLanguageManager().getDeserializedString("click-to-restore")))
