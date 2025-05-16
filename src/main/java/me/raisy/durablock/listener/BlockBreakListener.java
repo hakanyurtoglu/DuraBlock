@@ -7,8 +7,7 @@ import me.raisy.durablock.model.BlockType;
 import me.raisy.durablock.model.Reward;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -110,19 +109,36 @@ public class BlockBreakListener implements Listener {
                 }
 
                 // Play sound
-                boolean isPlaySoundEnabled = plugin.getConfig().getBoolean("blocks." + blockType.getName() + ".on-break.sound.enabled");
-                String soundType = plugin.getConfig().getString("blocks." + blockType.getName() + ".on-break.sound.sound-type");
-                boolean playType = plugin.getConfig().getBoolean("blocks." + blockType.getName() + ".on-break.sound.play-to-everyone");
-                Sound sound = Sound.valueOf(soundType);
+                String basePath = "blocks." + blockType.getName() + ".on-break.sound";
+                boolean isSoundEnabled = plugin.getConfig().getBoolean(basePath + ".enabled");
+                if (!isSoundEnabled) return;
 
-                if (isPlaySoundEnabled) {
-                    if (playType) {
-                        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                            onlinePlayer.playSound(onlinePlayer.getLocation(), sound, 1f, 1f);
-                        }
-                    } else {
-                        player.playSound(block.getLocation(), sound, 1f, 1f);
+                String soundKey = plugin.getConfig().getString(basePath + ".sound-type");
+                boolean playToEveryone = plugin.getConfig().getBoolean(basePath + ".play-to-everyone");
+
+                if (soundKey == null || soundKey.isEmpty()) {
+                    plugin.getLogger().severe("Sound key is missing for block type: " + blockType.getName());
+                    return;
+                }
+
+                NamespacedKey namespacedKey = NamespacedKey.fromString(soundKey);
+                if (namespacedKey == null) {
+                    plugin.getLogger().severe("Invalid sound key: " + soundKey);
+                    return;
+                }
+
+                Sound sound = Registry.SOUNDS.get(namespacedKey);
+                if (sound == null) {
+                    plugin.getLogger().severe("Sound not found in registry: " + soundKey);
+                    return;
+                }
+
+                if (playToEveryone) {
+                    for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                        onlinePlayer.playSound(onlinePlayer.getLocation(), sound, SoundCategory.MASTER, 1.0F, 1.0F);
                     }
+                } else {
+                    player.playSound(player.getLocation(), sound, SoundCategory.MASTER, 1.0F, 1.0F);
                 }
 
             }
