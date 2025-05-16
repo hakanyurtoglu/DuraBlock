@@ -1,40 +1,50 @@
 language: en_us
 
-# Interval for updating hologram (in seconds)
-hologram-update-interval: 1
-# Interval for checking if blocks needs to be enabled (in seconds)
-block-restore-interval: 1
-
 blocks:
   test-block:
     durability: 20
-    # Time for restoring the block after being broken (in seconds)
+    # Time in seconds before the block gets restored after being broken
     restore-interval: 30
-    # How much the hologram should be higher than the block
+    # Vertical offset for the hologram above the block (in blocks)#
     y-level: 2
+    # Permission required to break this block
     permission: durablock.break.test-block
-    # See DecentHolograms wiki for format & colors: https://wiki.decentholograms.eu/general/format-and-colors/
+    # Text lines displayed in the hologram when the block is active/enabled
+    # Refer to the DecentHolograms wiki for formatting and color options:
+    # https://wiki.decentholograms.eu/general/format-and-colors/
     enabled-hologram-lines:
-      - "Test Block"
+      - "<#6DE1D2>Test Block"
       - "<#FF0000>Durability: {durability}</#00FF00>"
+    # Text lines displayed in the hologram when the block is disabled
     disabled-hologram-lines:
       - "Disabled for now."
-      - "Will be activated in: {restore}"
-      - "Broken by: {last_player}"
-    # Commands that executes with chance when the block's durability is higher than 0
+      - "Will be activated in: <#FFA725>{restore}"
+      - "Broken by: <#FFA725>{last_player}"
+    # List of commands executed with a certain probability when the block's durability is above 0
     rewards:
       - command: "give {player} diamond 1"
         chance: 0.1 # %10 chance
       - command: "give {player} emerald 2"
         chance: 0.3 # %30 chance
+    # Actions to perform when the block is broken
     on-break:
       sound:
         enabled: true
-        # https://jd.papermc.io/paper/1.21.4/org/bukkit/Sound.html for sound list
-        sound-type: "BLOCK_ANVIL_BREAK"
+        # https://minecraft.wiki/w/Sounds.json/Java_Edition_values for sound list
+        sound-type: "minecraft:entity.player.levelup"
+        # Whether the sound should play for everyone or only the player who broke it
         play-to-everyone: true
       broadcast:
         enabled: true
+        # Message broadcast to all players when the block is broken
         message: "<red>{player} broke the test-block"
+      # Commands executed when the block is broken
       commands:
         - "give {player} diamond 16"
+
+# Warning: Adjusting these values may impact server performance or cause unexpected behavior.
+# Only change them if you understand the potential consequences.
+# Interval for updating hologram (in seconds)
+hologram-update-interval: 1
+# Interval for checking if blocks needs to be enabled (in seconds)
+block-restore-interval: 1
