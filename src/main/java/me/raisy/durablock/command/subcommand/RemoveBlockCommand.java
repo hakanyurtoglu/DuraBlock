@@ -33,7 +33,7 @@ public class RemoveBlockCommand implements SubCommand {
         }
 
         if (args.length != 2) {
-            sender.sendMessage("Usage: /durablock delete <id>");
+            sender.sendMessage("Usage: /durablock remove <id>");
             return true;
         }
 
