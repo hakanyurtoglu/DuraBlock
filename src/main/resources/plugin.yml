@@ -2,13 +2,15 @@ name: DuraBlock
 version: '${project.version}'
 main: me.raisy.durablock.DuraBlockPlugin
 api-version: '1.19'
+description: 'Durablock is a Minecraft plugin that generates custom blocks with unique durabilities that players can race to break and earn rewards.'
+author: Raisy
 
 depend:
   - DecentHolograms
 
 commands:
   durablock:
-    description: "DuraBlock command"
+    description: 'DuraBlock command'
     permission: durablock.commands.main
     usage: /durablock
     aliases:
@@ -16,5 +18,5 @@ commands:
 
 permissions:
   durablock.commands.main:
-    description: "Permission for durablock command"
+    description: 'Permission for durablock command'
     default: op
