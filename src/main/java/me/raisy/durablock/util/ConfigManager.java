@@ -7,9 +7,7 @@ import me.raisy.durablock.model.BlockType;
 import me.raisy.durablock.model.Reward;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,28 +15,22 @@ import java.util.Map;
 
 public class ConfigManager {
     private final DuraBlockPlugin plugin;
-    private File configFile;
-    private YamlConfiguration config;
 
     public ConfigManager(DuraBlockPlugin plugin) {
         this.plugin = plugin;
     }
 
-
     public void loadBlockTypes() {
         ConfigurationSection blocksSection = plugin.getConfig().getConfigurationSection("blocks");
 
         for (String blockName : blocksSection.getKeys(false)) {
-            String path = blockName;
-
-            String permission = blocksSection.getString(path + ".permission");
-            int defaultDurability = blocksSection.getInt(path + ".durability");
-            int yLevel = blocksSection.getInt(path + ".y-level");
-            int restoreInterval = blocksSection.getInt(path + ".restore-interval");
-            List<String> enabledHologramLines = blocksSection.getStringList(path + ".enabled-hologram-lines");
-            List<String> disabledHologramLines = blocksSection.getStringList(path + ".disabled-hologram-lines");
-            List<Map<?, ?>> rewardSection = blocksSection.getMapList(path + ".rewards");
-
+            String permission = blocksSection.getString(blockName + ".permission");
+            int defaultDurability = blocksSection.getInt(blockName + ".durability");
+            int yLevel = blocksSection.getInt(blockName + ".y-level");
+            int restoreInterval = blocksSection.getInt(blockName + ".restore-interval");
+            List<String> enabledHologramLines = blocksSection.getStringList(blockName + ".enabled-hologram-lines");
+            List<String> disabledHologramLines = blocksSection.getStringList(blockName + ".disabled-hologram-lines");
+            List<Map<?, ?>> rewardSection = blocksSection.getMapList(blockName + ".rewards");
 
             BlockType blockType = new BlockType();
             blockType.setName(blockName);
@@ -61,7 +53,6 @@ public class ConfigManager {
 
             plugin.getBlockTypes().put(blockName, blockType);
             plugin.getLogger().info("Block type " + blockName + " loaded");
-
         }
     }
 
@@ -86,9 +77,7 @@ public class ConfigManager {
             Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, lines, customBlocksEntity.getCurrentDurability());
 
             plugin.getHolograms().put(blockLocation, hologram);
-
         }
-
     }
 
     public void reloadCustomBlocks() throws SQLException {
@@ -96,5 +85,4 @@ public class ConfigManager {
         plugin.getHolograms().clear();
         loadCustomBlocks();
     }
-
 }
