@@ -2,6 +2,8 @@ package me.raisy.durablock.command.subcommand;
 
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.SubCommand;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -54,6 +56,7 @@ public class RemoveBlockCommand implements SubCommand {
                 player.sendMessage(plugin.getLanguageManager().getDeserializedString("failed-to-delete"));
             }
         } catch (SQLException e) {
+            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 

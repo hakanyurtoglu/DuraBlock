@@ -4,6 +4,8 @@ import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.SubCommand;
 import me.raisy.durablock.database.entity.CustomBlocksEntity;
 import me.raisy.durablock.model.BlockType;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 
 import java.sql.SQLException;
@@ -61,6 +63,7 @@ public class RestoreBlockCommand implements SubCommand {
 
             return true;
         } catch (SQLException e) {
+            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
     }

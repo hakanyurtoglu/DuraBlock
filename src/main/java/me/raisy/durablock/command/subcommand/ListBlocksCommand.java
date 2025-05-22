@@ -71,6 +71,7 @@ public class ListBlocksCommand implements SubCommand {
                 player.sendMessage(message);
             }
         } catch (SQLException e) {
+            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 

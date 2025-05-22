@@ -6,6 +6,8 @@ import me.raisy.durablock.command.SubCommand;
 import me.raisy.durablock.database.entity.CustomBlocksEntity;
 import me.raisy.durablock.model.BlockType;
 import me.raisy.durablock.util.LocationUtil;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -87,6 +89,7 @@ public class AddBlockCommand implements SubCommand {
         try {
             plugin.getCustomBlocksService().addCustomBlock(customBlocksEntity);
         } catch (SQLException e) {
+            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 
