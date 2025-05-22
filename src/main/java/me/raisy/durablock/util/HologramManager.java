@@ -60,7 +60,7 @@ public class HologramManager {
                 BlockType blockType = plugin.getBlockTypes().get(customBlocksEntity.getBlockType());
                 String remaining = plugin.getDateUtil().formatTimeLeft(customBlocksEntity.getLastBrokenDate(), blockType.getRestoreInterval());
 
-                List<String> parsedLines = blockType.getDisabledhologramLines().stream()
+                List<String> parsedLines = blockType.getDisabledHologramLines().stream()
                         .map(line -> line.replace("{last_player}", customBlocksEntity.getLastPlayer()))
                         .map(line -> line.replace("{restore}", remaining))
                         .toList();

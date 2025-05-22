@@ -83,7 +83,7 @@ public class BlockBreakListener implements Listener {
                 plugin.getCustomBlocksService().updateCustomBlock(customBlocksEntity);
 
                 String remaining = plugin.getDateUtil().formatTimeLeft(customBlocksEntity.getLastBrokenDate(), blockType.getRestoreInterval());
-                List<String> lines = blockType.getDisabledhologramLines();
+                List<String> lines = blockType.getDisabledHologramLines();
                 List<String> parsedLines = lines.stream()
                         .map(line -> line.replace("{last_player}", customBlocksEntity.getLastPlayer()))
                         .map(line -> line.replace("{restore}", remaining))

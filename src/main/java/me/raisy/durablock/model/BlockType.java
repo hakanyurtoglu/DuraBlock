@@ -7,7 +7,7 @@ public class BlockType {
     private int defaultDurability;
     private String permission;
     private List<String> enabledHologramLines;
-    private List<String> disabledhologramLines;
+    private List<String> disabledHologramLines;
     private int yLevel;
     private int restoreInterval;
     private List<Reward> rewards;
@@ -37,12 +37,12 @@ public class BlockType {
         this.defaultDurability = defaultDurability;
     }
 
-    public List<String> getDisabledhologramLines() {
-        return disabledhologramLines;
+    public List<String> getDisabledHologramLines() {
+        return disabledHologramLines;
     }
 
-    public void setDisabledhologramLines(List<String> disabledhologramLines) {
-        this.disabledhologramLines = disabledhologramLines;
+    public void setDisabledHologramLines(List<String> disabledHologramLines) {
+        this.disabledHologramLines = disabledHologramLines;
     }
 
     public int getyLevel() {

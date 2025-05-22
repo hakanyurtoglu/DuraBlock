@@ -45,7 +45,7 @@ public class ConfigManager {
             blockType.setDefaultDurability(defaultDurability);
             blockType.setPermission(permission);
             blockType.setEnabledHologramLines(enabledHologramLines);
-            blockType.setDisabledhologramLines(disabledHologramLines);
+            blockType.setDisabledHologramLines(disabledHologramLines);
             blockType.setyLevel(yLevel);
             blockType.setRestoreInterval(restoreInterval);
 
@@ -82,7 +82,7 @@ public class ConfigManager {
             Location blockLocation = LocationUtil.stringToLocation(customBlocksEntity.getLocation());
             Location hologramLocation = blockLocation.clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
 
-            List<String> lines = customBlocksEntity.getCurrentDurability() <= 0 ? blockType.getDisabledhologramLines() : blockType.getEnabledHologramLines();
+            List<String> lines = customBlocksEntity.getCurrentDurability() <= 0 ? blockType.getDisabledHologramLines() : blockType.getEnabledHologramLines();
             Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, lines, customBlocksEntity.getCurrentDurability());
 
             plugin.getHolograms().put(blockLocation, hologram);
