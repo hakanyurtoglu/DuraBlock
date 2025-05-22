@@ -39,7 +39,7 @@ public class TaskManager {
 
                 // Check if the block passed time
                 Long lastBrokenDate = customBlocksEntity.getLastBrokenDate();
-                if (lastBrokenDate == null) return;
+                if (lastBrokenDate == null) continue;
 
                 boolean isPassed = DateUtil.isRestoreTimePassed(lastBrokenDate, durabilityRestoreInterval);
 
