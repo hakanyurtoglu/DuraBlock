@@ -30,8 +30,8 @@ public class ReloadCommand implements SubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         try {
-            plugin.getLanguageManager().reloadLanguage();
             plugin.reloadConfig();
+            plugin.getLanguageManager().reloadLanguage();
             plugin.getBlockTypes().clear();
             plugin.getConfigManager().loadBlockTypes();
             plugin.getConfigManager().reloadCustomBlocks();
