@@ -80,6 +80,10 @@ public class ConfigManager {
         }
     }
 
+    public String getPrefix() {
+        return plugin.getConfig().getString("prefix");
+    }
+
     public void reloadCustomBlocks() throws SQLException {
         plugin.getHologramManager().removeAllHolograms();
         plugin.getHolograms().clear();

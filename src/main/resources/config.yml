@@ -1,5 +1,7 @@
 language: en_us
 
+prefix: "<#874CCC><bold>DuraBlock</bold> <gray>» "
+
 blocks:
   test-block:
     durability: 20
