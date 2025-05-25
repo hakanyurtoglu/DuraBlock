@@ -20,3 +20,6 @@ permissions:
   durablock.commands.main:
     description: 'Permission for durablock command'
     default: op
+  durablock.notify.update:
+    description: "Permission for update notifier"
+    default: op

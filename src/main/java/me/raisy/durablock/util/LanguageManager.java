@@ -51,8 +51,27 @@ public class LanguageManager {
         return languageConfig.getString(key, "Missing value in language file: " + key);
     }
 
+    public String getString(String key, Boolean prependPrefix) {
+        String value = languageConfig.getString(key, "Missing value in language file: " + key);
+
+        if (prependPrefix) {
+            return plugin.getConfigManager().getPrefix() + value;
+        }
+
+        return value;
+    }
+
     public Component getDeserializedString(String key) {
         return MiniMessage.miniMessage().deserialize(getString(key));
     }
 
+    public Component getDeserializedString(String key, Boolean prependPrefix) {
+        Component value = MiniMessage.miniMessage().deserialize(getString(key));
+
+        if (prependPrefix) {
+            return Component.empty().append(MiniMessage.miniMessage().deserialize(plugin.getConfigManager().getPrefix())).append(value);
+        }
+
+        return value;
+    }
 }

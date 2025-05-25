@@ -16,6 +16,8 @@ restoration-ready: "Yenileniyor"
 restored-successfully: "<green>Belirtilen bloklar başarıyla yenilendi!"
 invalid-subcommand: "<red>Geçersiz komut! Yardım menüsü için /durablock komutunu kullan."
 
+update-notifier: "<light_purple>Eklentinin yeni bir sürümü mevcut!<newline><dark_gray>(<gray>mevcut: <red>{current} <gray>| son: <green>{latest}<dark_gray>)"
+
 date:
   hour: "s"
   minute: "d"

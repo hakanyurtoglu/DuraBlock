@@ -16,6 +16,8 @@ restoration-ready: "Restoring"
 restored-successfully: "<green>Successfully restored specified blocks!"
 invalid-subcommand: "<red>Invalid command! use /durablock to display help menu."
 
+update-notifier: "<light_purple>There is a new version of the plugin available!<newline><dark_gray>(<gray>current: <red>{current} <gray>| latest: <green>{latest}<dark_gray>)"
+
 date:
   hour: "h"
   minute: "m"

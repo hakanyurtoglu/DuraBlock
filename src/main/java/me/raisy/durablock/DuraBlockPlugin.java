@@ -21,6 +21,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
     private final Map<Location, Hologram> holograms = new HashMap<>();
     private final HologramManager hologramManager = new HologramManager(this);
     private final TaskManager taskManager = new TaskManager(this);
+    private UpdateChecker updateChecker;
     private DateUtil dateUtil;
     private LanguageManager languageManager;
     private CustomBlocksService customBlocksService;
@@ -30,6 +31,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
     public void onEnable() {
         configManager = new ConfigManager(this);
         languageManager = new LanguageManager(this);
+        updateChecker = new UpdateChecker(this);
         dateUtil = new DateUtil(this);
 
         saveDefaultConfig();
@@ -41,6 +43,7 @@ public final class DuraBlockPlugin extends JavaPlugin {
         getCommand("durablock").setExecutor(new DurablockCommand(this));
 
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
+        getServer().getPluginManager().registerEvents(updateChecker, this);
 
         try {
             if (!getDataFolder().exists()) {
@@ -53,12 +56,19 @@ public final class DuraBlockPlugin extends JavaPlugin {
 
             taskManager.startTasks();
 
-
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to load database: " + e.getMessage());
             Bukkit.getPluginManager().disablePlugin(this);
         }
+
+        Bukkit.getScheduler().runTaskLaterAsynchronously(this, () -> {
+            updateChecker.checkForUpdates().thenAccept(hasUpdate -> {
+                if (hasUpdate) {
+                    updateChecker.notifyConsole();
+                }
+            });
+        }, 100L);
 
     }
 
