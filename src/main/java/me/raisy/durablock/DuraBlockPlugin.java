@@ -6,6 +6,7 @@ import me.raisy.durablock.database.CustomBlocksService;
 import me.raisy.durablock.listener.BlockBreakListener;
 import me.raisy.durablock.model.BlockType;
 import me.raisy.durablock.util.*;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,7 +36,6 @@ public final class DuraBlockPlugin extends JavaPlugin {
         dateUtil = new DateUtil(this);
 
         saveDefaultConfig();
-
         configManager.loadBlockTypes();
         languageManager.saveDefaultLanguageFiles();
         languageManager.loadLanguage();
@@ -68,10 +68,12 @@ public final class DuraBlockPlugin extends JavaPlugin {
                     updateChecker.notifyConsole();
                 }
             });
+
+            int pluginId = 25981;
+            Metrics metrics = new Metrics(this, pluginId);
         }, 100L);
 
     }
-
 
     public Map<String, BlockType> getBlockTypes() {
         return blockTypes;
