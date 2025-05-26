@@ -31,7 +31,8 @@ public class RestoreBlockCommand implements SubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         if (args.length != 2) {
-            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("not-enough-arguments"));
+            sender.sendMessage("Usage: /durablock restore <block-id>");
+            return true;
         }
 
         String blockId = args[1];

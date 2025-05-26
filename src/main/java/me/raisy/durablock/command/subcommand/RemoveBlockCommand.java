@@ -35,7 +35,7 @@ public class RemoveBlockCommand implements SubCommand {
         }
 
         if (args.length != 2) {
-            sender.sendMessage("Usage: /durablock remove <id>");
+            sender.sendMessage("Usage: /durablock remove <block-id>");
             return true;
         }
 
