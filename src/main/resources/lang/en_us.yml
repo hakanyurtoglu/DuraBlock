@@ -23,6 +23,7 @@ reload:
 help:
   - "<gray>--------------- <light_purple>DuraBlock Help Menu <gray>---------------"
   - "<gold>/durablock <green>add <gray><block-type> <dark_gray>| <yellow>Adds a new custom block of the specified type"
+  - "<gold>/durablock <green>info <dark_gray>| <yellow>Displays information about the plugin"
   - "<gold>/durablock <green>list <dark_gray>| <yellow>Lists all configured custom blocks"
   - "<gold>/durablock <green>reload <dark_gray>| <yellow>Reloads the configuration"
   - "<gold>/durablock <green>remove <gray><block-id> <dark_gray>| <yellow>Removes a specific custom block by ID"

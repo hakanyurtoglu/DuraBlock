@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DurablockCommand implements TabExecutor {
@@ -22,6 +21,7 @@ public class DurablockCommand implements TabExecutor {
         this.plugin = plugin;
 
         subCommands.add(new AddBlockCommand(plugin));
+        subCommands.add(new InfoCommand(plugin));
         subCommands.add(new ListBlocksCommand(plugin));
         subCommands.add(new ReloadCommand(plugin));
         subCommands.add(new RemoveBlockCommand(plugin));
@@ -49,8 +49,8 @@ public class DurablockCommand implements TabExecutor {
 
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
-            List<String> subCommands = Arrays.asList("reload", "list", "remove", "add", "restore");
-            StringUtil.copyPartialMatches(args[0], subCommands, completions);
+            List<String> subCommandNames = subCommands.stream().map(SubCommand::getName).toList();
+            StringUtil.copyPartialMatches(args[0], subCommandNames, completions);
 
             return completions;
         } else if (args.length == 2) {

@@ -23,6 +23,7 @@ reload:
 help:
   - "<gray>--------------- <light_purple>DuraBlock Yardım Menüsü <gray>---------------"
   - "<gold>/durablock <green>add <gray><blok-türü> <dark_gray>| <yellow>Belirtilen türde yeni bir özel blok ekler"
+  - "<gold>/durablock <green>info <dark_gray>| <yellow>Eklenti hakkında bilgi gösterir"
   - "<gold>/durablock <green>list <dark_gray>| <yellow>Yapılandırılmış tüm özel blokları listeler"
   - "<gold>/durablock <green>reload <dark_gray>| <yellow>Yapılandırmayı yeniden yükler"
   - "<gold>/durablock <green>remove <gray><blok-id> <dark_gray>| <yellow>Belirtilen kimliğe sahip özel bloğu kaldırır"
