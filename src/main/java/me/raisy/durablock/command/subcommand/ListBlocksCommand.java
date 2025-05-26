@@ -60,6 +60,7 @@ public class ListBlocksCommand implements SubCommand {
                 Component commandMessage = MiniMessage.miniMessage().deserialize(plugin.getLanguageManager().getString("list-command-message")
                         .replace("{block_type}", customBlock.getBlockType())
                         .replace("{location}", customBlock.getLocation())
+                        .replace("{block_id}", String.valueOf(customBlock.getId()))
                         .replace("{current_durability}", Integer.toString(customBlock.getCurrentDurability())));
 
                 Component message = Component.text()
