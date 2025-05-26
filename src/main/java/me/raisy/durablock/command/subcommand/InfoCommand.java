@@ -33,7 +33,7 @@ public class InfoCommand implements SubCommand {
                 .append(Component.text("v" + plugin.getDescription().getVersion(), NamedTextColor.LIGHT_PURPLE))
                 .append(Component.text(" by ", NamedTextColor.YELLOW))
                 .append(Component.text("Raisy.", NamedTextColor.LIGHT_PURPLE))
-                .appendNewline()
+                .append(Component.newline())
                 .append(Component.text("https://modrinth.com/plugin/durablock", NamedTextColor.GRAY).clickEvent(ClickEvent.openUrl("https://modrinth.com/plugin/durablock")));
 
         sender.sendMessage(component);
