@@ -9,12 +9,25 @@ block-already-enabled: "<red>Bu blok zaten aktif!"
 blocks-not-found: "<red>Sunucuda özel blok bulunamadı!"
 click-to-delete: "<gray>Silmek için tıkla"
 click-to-restore: "<gray>Bu bloğu hemen yenilemek için tıkla"
-list-command-message: "<yellow>tür: <green>{block_type} <yellow>Dayanıklılık: <green>{current_durability} <yellow>Konum: <green>{location}"
+list-command-message: "<yellow>ID: <gray>{block_id} <yellow>tür: <green>{block_type} <yellow>Dayanıklılık: <green>{current_durability} <yellow>Konum: <green>{location}"
 deleted-successfully: "<green>Özel blok başarıyla silindi."
 failed-to-delete: "<red>Özel blok silinemedi."
 restoration-ready: "Yenileniyor"
 restored-successfully: "<green>Belirtilen bloklar başarıyla yenilendi!"
 invalid-subcommand: "<red>Geçersiz komut! Yardım menüsü için /durablock komutunu kullan."
+
+reload:
+  successful: "<green>Özel bloklar başarıyla yenilendi!"
+  failed: "<red>Eklenti yenilenirken bir hata oluştu! Daha fazla bilgi için konsolu kontrol et."
+
+help:
+  - "<gray>--------------- <light_purple>DuraBlock Yardım Menüsü <gray>---------------"
+  - "<gold>/durablock <green>add <gray><blok-türü> <dark_gray>| <yellow>Belirtilen türde yeni bir özel blok ekler"
+  - "<gold>/durablock <green>list <dark_gray>| <yellow>Yapılandırılmış tüm özel blokları listeler"
+  - "<gold>/durablock <green>reload <dark_gray>| <yellow>Yapılandırmayı yeniden yükler"
+  - "<gold>/durablock <green>remove <gray><blok-id> <dark_gray>| <yellow>Belirtilen kimliğe sahip özel bloğu kaldırır"
+  - "<gold>/durablock <green>restore <gray><blok-id> <dark_gray>| <yellow>Belirtilen kimliğe sahip bloğu manuel olarak geri yükler"
+  - "<gray>--------------- <light_purple>DuraBlock Yardım Menüsü <gray>---------------"
 
 update-notifier: "<light_purple>Eklentinin yeni bir sürümü mevcut!<newline><dark_gray>(<gray>mevcut: <red>{current} <gray>| son: <green>{latest}<dark_gray>)"
 

@@ -9,12 +9,25 @@ block-already-enabled: "<red>This block is already enabled!"
 blocks-not-found: "<red>No custom blocks found in server!"
 click-to-delete: "<gray>Click to delete this block"
 click-to-restore: "<gray>Click to restore this block immediately"
-list-command-message: "<yellow>Block type: <green>{block_type} <yellow>Durability: <green>{current_durability} <yellow>Location: <green>{location}"
+list-command-message: "<yellow>ID: <gray>{block_id} <yellow>Block type: <green>{block_type} <yellow>Durability: <green>{current_durability} <yellow>Location: <green>{location}"
 deleted-successfully: "<green>Custom block deleted successfully."
 failed-to-delete: "<red>Custom block could not be deleted."
 restoration-ready: "Restoring"
 restored-successfully: "<green>Successfully restored specified blocks!"
 invalid-subcommand: "<red>Invalid command! use /durablock to display help menu."
+
+reload:
+  successful: "<green>Custom blocks reloaded successfully!"
+  failed: "<red>Failed to reload the plugin! Check to logs for more information."
+
+help:
+  - "<gray>--------------- <light_purple>DuraBlock Help Menu <gray>---------------"
+  - "<gold>/durablock <green>add <gray><block-type> <dark_gray>| <yellow>Adds a new custom block of the specified type"
+  - "<gold>/durablock <green>list <dark_gray>| <yellow>Lists all configured custom blocks"
+  - "<gold>/durablock <green>reload <dark_gray>| <yellow>Reloads the configuration"
+  - "<gold>/durablock <green>remove <gray><block-id> <dark_gray>| <yellow>Removes a specific custom block by ID"
+  - "<gold>/durablock <green>restore <gray><block-id> <dark_gray>| <yellow>Manually restores a block by ID"
+  - "<gray>--------------- <light_purple>DuraBlock Help Menu <gray>---------------"
 
 update-notifier: "<light_purple>There is a new version of the plugin available!<newline><dark_gray>(<gray>current: <red>{current} <gray>| latest: <green>{latest}<dark_gray>)"
 

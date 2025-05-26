@@ -2,9 +2,6 @@ package me.raisy.durablock.command.subcommand;
 
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.SubCommand;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 
 import java.sql.SQLException;
@@ -37,9 +34,9 @@ public class ReloadCommand implements SubCommand {
             plugin.getConfigManager().reloadCustomBlocks();
             plugin.getTaskManager().startTasks();
 
-            sender.sendMessage(MiniMessage.miniMessage().deserialize("<green>Custom blocks reloaded successfully"));
+            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("reload.successful", true));
         } catch (SQLException e) {
-            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
+            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("reload.failed"));
             throw new RuntimeException(e);
         }
 

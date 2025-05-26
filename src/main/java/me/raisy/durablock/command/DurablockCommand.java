@@ -2,8 +2,7 @@ package me.raisy.durablock.command;
 
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.subcommand.*;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -75,10 +74,10 @@ public class DurablockCommand implements TabExecutor {
     }
 
     private void displayHelp(CommandSender sender) {
-        sender.sendMessage(Component.text("--------------- DuraBlock Help Menu ---------------", NamedTextColor.GOLD));
+        List<String> helpList = plugin.getLanguageManager().getLanguageConfig().getStringList("help");
 
-        for (SubCommand subCommand : subCommands) {
-            sender.sendMessage(Component.text(subCommand.getName() + " - " + subCommand.getDescription(), NamedTextColor.YELLOW));
+        for (String message : helpList) {
+            sender.sendMessage(MiniMessage.miniMessage().deserialize(message));
         }
     }
 }

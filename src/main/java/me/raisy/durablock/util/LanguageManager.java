@@ -74,4 +74,8 @@ public class LanguageManager {
 
         return value;
     }
+
+    public YamlConfiguration getLanguageConfig() {
+        return languageConfig;
+    }
 }
