@@ -7,6 +7,9 @@
 [![Discord](https://img.shields.io/discord/1373698327949869076?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/p3PbC4afzV)
 
 <b>
+  <a href="https://www.spigotmc.org/resources/durablock.125511/">Spigot</a>
+</b> &nbsp;|&nbsp; 
+<b>
   <a href="https://modrinth.com/plugin/durablock">Modrinth</a>
 </b> &nbsp;|&nbsp; <b>
   <a href="https://hangar.papermc.io/raisy/DuraBlock">Hangar</a>
