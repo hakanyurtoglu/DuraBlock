@@ -1,8 +1,8 @@
 name: DuraBlock
 version: '${project.version}'
 main: me.raisy.durablock.DuraBlockPlugin
-api-version: '1.19'
-description: 'Durablock is a Minecraft plugin that generates custom blocks with unique durabilities that players can race to break and earn rewards.'
+api-version: '1.18'
+description: 'DuraBlock is a Minecraft plugin that generates custom blocks with unique durabilities that players can race to break and earn rewards.'
 author: Raisy
 
 depend:

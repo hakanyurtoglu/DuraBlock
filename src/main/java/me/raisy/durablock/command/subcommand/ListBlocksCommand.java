@@ -28,13 +28,18 @@ public class ListBlocksCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Lists the durablocks.";
+        return "Lists all configured custom blocks";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return List.of();
     }
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("no-console"));
+            plugin.adventure().sender(sender).sendMessage(plugin.getLanguageManager().getDeserializedString("no-console"));
             return true;
         }
 
@@ -43,7 +48,7 @@ public class ListBlocksCommand implements SubCommand {
             customBlocks = plugin.getCustomBlocksService().getAllCustomBlocks();
 
             if (customBlocks.isEmpty()) {
-                player.sendMessage(plugin.getLanguageManager().getDeserializedString("blocks-not-found"));
+                plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("blocks-not-found"));
                 return true;
             }
 
@@ -69,10 +74,10 @@ public class ListBlocksCommand implements SubCommand {
                         .append(commandMessage)
                         .build();
 
-                player.sendMessage(message);
+                plugin.adventure().player(player).sendMessage(message);
             }
         } catch (SQLException e) {
-            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
+            plugin.adventure().sender(sender).sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 

@@ -3,6 +3,7 @@ package me.raisy.durablock.util;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.raisy.durablock.DuraBlockPlugin;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -103,13 +104,14 @@ public class UpdateChecker implements Listener {
 
     public void notifyConsole() {
         if (updateAvailable && latestVersion != null) {
-            String separator = "===========================================";
+            Audience console = plugin.adventure().console();
+            String separator = "=".repeat(43);
 
-            plugin.getComponentLogger().info(Component.text(separator, NamedTextColor.DARK_GRAY));
-            plugin.getComponentLogger().info(Component.text("DuraBlock plugin update available!", NamedTextColor.LIGHT_PURPLE));
-            plugin.getComponentLogger().info(Component.text("Current version: ", NamedTextColor.YELLOW).append(Component.text(currentVersion, NamedTextColor.RED)));
-            plugin.getComponentLogger().info(Component.text("Latest version: ", NamedTextColor.YELLOW).append(Component.text(latestVersion, NamedTextColor.GREEN)));
-            plugin.getComponentLogger().info(Component.text(separator, NamedTextColor.DARK_GRAY));
+            console.sendMessage(Component.text(separator, NamedTextColor.DARK_GRAY));
+            console.sendMessage(Component.text("DuraBlock plugin update available!", NamedTextColor.LIGHT_PURPLE));
+            console.sendMessage(Component.text("Current version: ", NamedTextColor.YELLOW).append(Component.text(currentVersion, NamedTextColor.RED)));
+            console.sendMessage(Component.text("Latest version: ", NamedTextColor.YELLOW).append(Component.text(latestVersion, NamedTextColor.GREEN)));
+            console.sendMessage(Component.text(separator, NamedTextColor.DARK_GRAY));
         }
     }
 
@@ -118,7 +120,7 @@ public class UpdateChecker implements Listener {
             Bukkit.getScheduler().runTask(plugin, () -> {
                 String notifierMessage = plugin.getLanguageManager().getString("update-notifier", true).replace("{current}", currentVersion).replace("{latest}", latestVersion);
                 Component component = MiniMessage.miniMessage().deserialize(notifierMessage);
-                player.sendMessage(component);
+                plugin.adventure().player(player).sendMessage(component);
             });
         }
     }

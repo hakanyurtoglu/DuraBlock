@@ -71,7 +71,7 @@ public class ConfigManager {
             }
 
             Location blockLocation = LocationUtil.stringToLocation(customBlocksEntity.getLocation());
-            Location hologramLocation = blockLocation.clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
+            Location hologramLocation = LocationUtil.centerLocation(blockLocation.clone().add(0, blockType.getyLevel(), 0));
 
             List<String> lines = customBlocksEntity.getCurrentDurability() <= 0 ? blockType.getDisabledHologramLines() : blockType.getEnabledHologramLines();
             Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, lines, customBlocksEntity.getCurrentDurability());

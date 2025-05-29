@@ -2,7 +2,8 @@ package me.raisy.durablock.command;
 
 import me.raisy.durablock.DuraBlockPlugin;
 import me.raisy.durablock.command.subcommand.*;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DurablockCommand implements TabExecutor {
     private final List<SubCommand> subCommands = new ArrayList<>();
@@ -37,7 +39,7 @@ public class DurablockCommand implements TabExecutor {
 
         SubCommand subCommand = getSubCommand(args[0]);
         if (subCommand == null) {
-            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("invalid-subcommand"));
+            plugin.adventure().sender(sender).sendMessage(plugin.getLanguageManager().getDeserializedString("invalid-subcommand"));
             return true;
         }
 
@@ -74,10 +76,27 @@ public class DurablockCommand implements TabExecutor {
     }
 
     private void displayHelp(CommandSender sender) {
-        List<String> helpList = plugin.getLanguageManager().getLanguageConfig().getStringList("help");
+        String dashes = "-".repeat(15);
 
-        for (String message : helpList) {
-            sender.sendMessage(MiniMessage.miniMessage().deserialize(message));
+        Component separator = Component.text(dashes, NamedTextColor.DARK_GRAY)
+                .append(Component.text(" DuraBlock Help Menu ", NamedTextColor.LIGHT_PURPLE))
+                .append(Component.text(dashes, NamedTextColor.DARK_GRAY));
+
+        plugin.adventure().sender(sender).sendMessage(separator);
+
+        for (SubCommand subCommand : subCommands) {
+            String argsString = subCommand.getArguments().stream().map(s -> "<" + s + ">")
+                    .collect(Collectors.joining(" "));
+
+            Component commandInfo = Component.text("/durablock ", NamedTextColor.GOLD)
+                    .append(Component.text(subCommand.getName(), NamedTextColor.GREEN))
+                    .append(Component.text(" " + argsString, NamedTextColor.GRAY))
+                    .append(Component.text(" | ", NamedTextColor.DARK_GRAY))
+                    .append(Component.text(subCommand.getDescription(), NamedTextColor.YELLOW));
+
+            plugin.adventure().sender(sender).sendMessage(commandInfo);
         }
+
+        plugin.adventure().sender(sender).sendMessage(separator);
     }
 }

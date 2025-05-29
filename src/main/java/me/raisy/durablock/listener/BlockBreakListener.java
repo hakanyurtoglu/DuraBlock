@@ -42,7 +42,7 @@ public class BlockBreakListener implements Listener {
                 String permissionMessage = plugin.getLanguageManager().getString("no-permission-block-break").replace("{block_type}", blockType.getName());
                 Component formatted = MiniMessage.miniMessage().deserialize(permissionMessage);
 
-                player.sendMessage(formatted);
+                plugin.adventure().player(player).sendMessage(formatted);
                 return;
             }
 
@@ -105,7 +105,7 @@ public class BlockBreakListener implements Listener {
 
 
                 if (isBroadcastEnabled && !broadcastMessage.isEmpty()) {
-                    plugin.getServer().broadcast(MiniMessage.miniMessage().deserialize(broadcastMessage));
+                    plugin.adventure().players().sendMessage(MiniMessage.miniMessage().deserialize(broadcastMessage));
                 }
 
                 // Play sound

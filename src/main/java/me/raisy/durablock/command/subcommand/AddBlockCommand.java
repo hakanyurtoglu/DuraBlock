@@ -31,7 +31,12 @@ public class AddBlockCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Generates a new durablock.";
+        return "Adds a new custom block of the specified type";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return List.of("block-type");
     }
 
     @Override
@@ -45,12 +50,12 @@ public class AddBlockCommand implements SubCommand {
         Block targetBlock = player.getTargetBlockExact(5);
 
         if (targetBlock == null) {
-            player.sendMessage(plugin.getLanguageManager().getDeserializedString("no-target-block"));
+            plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("no-target-block"));
             return true;
         }
 
         if (args.length < 2) {
-            player.sendMessage(plugin.getLanguageManager().getDeserializedString("no-block-type"));
+            plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("no-block-type"));
             return true;
         }
 
@@ -58,7 +63,7 @@ public class AddBlockCommand implements SubCommand {
         BlockType blockType = plugin.getBlockTypes().get(blockTypeArg);
 
         if (blockType == null) {
-            player.sendMessage(plugin.getLanguageManager().getDeserializedString("invalid-block-type"));
+            plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("invalid-block-type"));
             return true;
         }
 
@@ -67,7 +72,7 @@ public class AddBlockCommand implements SubCommand {
         // Check if the block is already in db
         try {
             if (plugin.getCustomBlocksService().isBlockExists(targetBlock.getLocation())) {
-                player.sendMessage(plugin.getLanguageManager().getDeserializedString("block-already-exists"));
+                plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("block-already-exists"));
                 return true;
             }
         } catch (SQLException e) {
@@ -75,7 +80,7 @@ public class AddBlockCommand implements SubCommand {
         }
 
         // Create hologram
-        Location hologramLocation = targetBlock.getLocation().clone().add(0, blockType.getyLevel(), 0).toCenterLocation();
+        Location hologramLocation = LocationUtil.centerLocation(targetBlock.getLocation().clone().add(0, blockType.getyLevel(), 0));
         Hologram hologram = plugin.getHologramManager().createHologram(hologramLocation, blockType.getEnabledHologramLines(), blockType.getDefaultDurability());
         plugin.getHolograms().put(targetBlock.getLocation(), hologram);
 
@@ -89,7 +94,7 @@ public class AddBlockCommand implements SubCommand {
         try {
             plugin.getCustomBlocksService().addCustomBlock(customBlocksEntity);
         } catch (SQLException e) {
-            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
+            plugin.adventure().sender(sender).sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 

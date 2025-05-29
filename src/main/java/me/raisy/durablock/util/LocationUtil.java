@@ -21,4 +21,12 @@ public class LocationUtil {
     public static String locationToString(Location location) {
         return location.getWorld().getName() + "," + location.getBlockX() + "," + location.getBlockY() + "," + location.getBlockZ();
     }
+
+    public static Location centerLocation(Location location) {
+        Location centerLoc = location.clone();
+        centerLoc.setX((double) location.getBlockX() + (double) 0.5F);
+        centerLoc.setY((double) location.getBlockY() + (double) 0.5F);
+        centerLoc.setZ((double) location.getBlockZ() + (double) 0.5F);
+        return centerLoc;
+    }
 }

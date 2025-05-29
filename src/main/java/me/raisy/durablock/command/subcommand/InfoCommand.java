@@ -23,7 +23,12 @@ public class InfoCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Displays information about the plugin.";
+        return "Displays information about the plugin";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return List.of();
     }
 
     @Override
@@ -36,7 +41,7 @@ public class InfoCommand implements SubCommand {
                 .append(Component.newline())
                 .append(Component.text("https://modrinth.com/plugin/durablock", NamedTextColor.GRAY).clickEvent(ClickEvent.openUrl("https://modrinth.com/plugin/durablock")));
 
-        sender.sendMessage(component);
+        plugin.adventure().sender(sender).sendMessage(component);
         return true;
     }
 

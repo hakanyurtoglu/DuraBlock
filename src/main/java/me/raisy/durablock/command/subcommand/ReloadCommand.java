@@ -21,7 +21,12 @@ public class ReloadCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Reloads the plugin.";
+        return "Reloads the plugin";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return List.of();
     }
 
     @Override
@@ -34,9 +39,9 @@ public class ReloadCommand implements SubCommand {
             plugin.getConfigManager().reloadCustomBlocks();
             plugin.getTaskManager().startTasks();
 
-            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("reload.successful", true));
+            plugin.adventure().sender(sender).sendMessage(plugin.getLanguageManager().getDeserializedString("reload.successful", true));
         } catch (SQLException e) {
-            sender.sendMessage(plugin.getLanguageManager().getDeserializedString("reload.failed"));
+            plugin.adventure().sender(sender).sendMessage(plugin.getLanguageManager().getDeserializedString("reload.failed"));
             throw new RuntimeException(e);
         }
 

@@ -24,7 +24,12 @@ public class RemoveBlockCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Removes a durablock";
+        return "Removes a specific custom block by ID";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return List.of("block-id");
     }
 
     @Override
@@ -43,20 +48,20 @@ public class RemoveBlockCommand implements SubCommand {
         try {
             id = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            sender.sendMessage("Invalid ID.");
+            plugin.adventure().sender(sender).sendMessage(plugin.getLanguageManager().getDeserializedString("invalid-args"));
             return true;
         }
 
         try {
             boolean isDeleted = plugin.getCustomBlocksService().removeCustomBlockById(id);
             if (isDeleted) {
-                player.sendMessage(plugin.getLanguageManager().getDeserializedString("deleted-successfully"));
+                plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("deleted-successfully"));
                 plugin.getConfigManager().reloadCustomBlocks();
             } else {
-                player.sendMessage(plugin.getLanguageManager().getDeserializedString("failed-to-delete"));
+                plugin.adventure().player(player).sendMessage(plugin.getLanguageManager().getDeserializedString("failed-to-delete"));
             }
         } catch (SQLException e) {
-            sender.sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
+            plugin.adventure().sender(sender).sendMessage(Component.text("A database error occurred. Please check the logs.", NamedTextColor.RED));
             throw new RuntimeException(e);
         }
 

@@ -9,6 +9,8 @@ public interface SubCommand {
 
     String getDescription();
 
+    List<String> getArguments();
+
     boolean execute(CommandSender sender, String[] args);
 
     public List<String> onTabComplete(CommandSender sender, String[] args);

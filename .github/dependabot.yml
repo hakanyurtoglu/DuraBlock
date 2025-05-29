@@ -8,6 +8,7 @@ updates:
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: 'org.spigotmc:spigot-api'
     commit-message:
       prefix: "deps"
 

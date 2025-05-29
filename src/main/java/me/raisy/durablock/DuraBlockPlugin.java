@@ -6,11 +6,13 @@ import me.raisy.durablock.database.CustomBlocksService;
 import me.raisy.durablock.listener.BlockBreakListener;
 import me.raisy.durablock.model.BlockType;
 import me.raisy.durablock.util.*;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nonnull;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,12 +30,23 @@ public final class DuraBlockPlugin extends JavaPlugin {
     private CustomBlocksService customBlocksService;
     private ConfigManager configManager;
 
+    private BukkitAudiences adventure;
+
+    public @Nonnull BukkitAudiences adventure() {
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return this.adventure;
+    }
+
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
         languageManager = new LanguageManager(this);
         updateChecker = new UpdateChecker(this);
         dateUtil = new DateUtil(this);
+
+        this.adventure = BukkitAudiences.create(this);
 
         saveDefaultConfig();
         configManager.loadBlockTypes();
@@ -73,6 +86,14 @@ public final class DuraBlockPlugin extends JavaPlugin {
             Metrics metrics = new Metrics(this, pluginId);
         }, 100L);
 
+    }
+
+    @Override
+    public void onDisable() {
+        if (this.adventure != null) {
+            this.adventure.close();
+            this.adventure = null;
+        }
     }
 
     public Map<String, BlockType> getBlockTypes() {
